@@ -33,6 +33,17 @@ Plateforme complète pour importer, analyser et visualiser des données avec l'I
 - Backend: FastAPI + pandas + numpy + scikit-learn + SQLite
 - Frontend: React + Tailwind CSS + composants style shadcn/ui + Recharts
 
+## 🚀 Déploiement (Vercel Multi-Service)
+
+**Frontend + Backend déployés ensemble sur Vercel!**
+
+```
+https://myc-ai-dashboard.vercel.app/        → Frontend
+https://myc-ai-dashboard.vercel.app/_/backend → Backend API
+```
+
+Voir [VERCEL_MULTISERVICE.md](./VERCEL_MULTISERVICE.md) pour les instructions.
+
 ## Arborescence
 
 - `backend/` API Python

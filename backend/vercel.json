@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "buildCommand": "pip install -r requirements.txt",
+  "runtime": "python@3.11",
+  "env": {
+    "PYTHONUNBUFFERED": "1",
+    "ENVIRONMENT": "production"
+  },
+  "functions": {
+    "main.py": {
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  }
+}
