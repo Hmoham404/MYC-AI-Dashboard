@@ -1,0 +1,42 @@
+import axios from 'axios';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 120000,
+});
+
+export async function uploadFile(file, onUploadProgress) {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const { data } = await api.post('/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+    onUploadProgress,
+  });
+  return data;
+}
+
+export async function analyzeFile(fileId, language = 'fr') {
+  const { data } = await api.post('/analyze', { file_id: fileId }, { params: { language } });
+  return data;
+}
+
+export async function getCharts(fileId, params = {}) {
+  const query = {
+    ...(params.language ? { language: params.language } : {}),
+    ...(params.column ? { column: params.column } : {}),
+    ...(params.chartTypes?.length ? { chart_types: params.chartTypes } : {}),
+  };
+
+  const { data } = await api.get(`/charts/${fileId}`, { params: query });
+  return data;
+}
+
+export function exportDashboard(fileId, format = 'png', language = 'fr') {
+  const url = `${API_BASE_URL}/export/${fileId}?format=${format}&language=${language}`;
+  window.open(url, '_blank');
+}
+
+export default api;
